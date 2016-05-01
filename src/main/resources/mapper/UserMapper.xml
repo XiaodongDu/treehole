@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shildon.treehole.dao.UserMapper">
+	<resultMap id="UserResult" type="User">
+		<id property="id" column="id" />  
+    	<result property="username" column="username" />  
+    	<result property="password" column="password" />  
+    	<result property="avatarPath" column="avatarpath" />  
+    	<result property="aboutMe" column="aboutme" />  
+    	<result property="location" column="location" />  
+    	<result property="birthdate" column="birthdate" />  
+		<association property="treehole" resultMap="TreeholeResult" />
+	</resultMap>
+	<resultMap type="Treehole" id="TreeholeResult">
+		<id property="id" column="treehole_id" />
+		<result property="about" column="about" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="User">
+		insert into user(id,username,password,avatarpath,aboutme,location,birthdate,treehole_id)
+			values(#{id},#{username},#{password},#{avatarPath},#{aboutMe},#{location},#{birthdate},#{treehole.id})
+  	</insert>
+  	
+  	<delete id="delete" parameterType="string">
+  		delete from user where id=#{id}
+  	</delete>
+  	
+  	<update id="update" parameterType="User">
+  		update user set 
+  			username=#{username},
+  			password=#{password},
+			avatarpath=#{avatarPath},
+			aboutme=#{aboutMe},
+			location=#{location},
+			birthdate=#{birthdate},
+			treehole_id=#{treehole.id}
+  		where id=#{id}
+  	</update>
+	
+	<select id="get" parameterType="string" resultMap="UserResult">
+		select * from user where id=#{id}
+	</select> 
+</mapper>

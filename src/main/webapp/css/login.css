@@ -1,0 +1,62 @@
+div {
+	margin: 0;
+  	border: 0;
+  	font-family: Arial,Verdana,Sans-serif;
+}
+
+input {
+	height: 30px;
+	width: 230px;
+}
+
+.login-container {
+	width: 1000px;
+	margin: 0 auto;
+	
+	position: relative;
+	top: 10%;
+	
+	font-size: 20px;
+}
+
+.signin-form, .signup-form {
+	display: inline-block;
+	width: 498px;
+	float: left;
+	
+	text-align: center;
+}
+
+.signin-form {
+	border-right: 1px solid gray;
+}
+
+div[class$='left'], div[class$='right'] {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+div[class$='left'] {
+	width: 160px;
+}
+
+div[class$='button'] {
+	margin-top: 20px;
+}
+
+input {
+	font-size: 20px;
+}
+
+.signup-reset, .signup-signup, .signin-signin {
+	height: 30px;
+	width: 70px;
+	line-height: 30px;
+	display: inline-block;
+	border-bottom: 2px solid gray;
+}
+
+.signup-reset:hover, .signup-signup:hover, .signin-signin:hover {
+	cursor: pointer;
+	border-bottom-color: #d00000;
+}
