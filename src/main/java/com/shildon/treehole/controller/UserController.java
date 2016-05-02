@@ -6,9 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.shildon.treehole.model.ResultMap;
 import com.shildon.treehole.model.User;
 import com.shildon.treehole.service.UserService;
+import com.shildon.treehole.support.Callback;
+import com.shildon.treehole.support.ResultMap;
 
 /**
  * 
@@ -17,21 +18,24 @@ import com.shildon.treehole.service.UserService;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 	
 	@Resource
 	private UserService userService;
 	
 	@RequestMapping("/insert.do")
 	@ResponseBody
-	public ResultMap<User> insert(User user) {
-		ResultMap<User> resultMap = new ResultMap<>();
-		if (userService.insert(user)) {
-			resultMap.setSuccess(true);
-		} else {
-			resultMap.setSuccess(false);
-		}
-		return resultMap;
+	public ResultMap<User> insert(final User user) {
+		return execute(new Callback<User>() {
+			@Override
+			public boolean callback(ResultMap<User> resultMap) {
+				if (userService.insert(user)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 	}
 	
 }
