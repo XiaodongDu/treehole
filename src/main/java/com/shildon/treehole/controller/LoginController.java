@@ -1,17 +1,15 @@
 package com.shildon.treehole.controller;
 
-import java.util.Date;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shildon.treehole.model.ResultMap;
-import com.shildon.treehole.model.Secret;
 import com.shildon.treehole.model.User;
 import com.shildon.treehole.service.SecretService;
 import com.shildon.treehole.service.UserService;
@@ -29,6 +27,8 @@ public class LoginController {
 	private UserService userService;
 	@Resource
 	private SecretService secretService;
+	@Resource
+	private RedisTemplate<String, Object> redisTemplate;
 	
 	@RequestMapping(value = "/signin.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -62,14 +62,11 @@ public class LoginController {
 	@RequestMapping("/test.do")
 	@ResponseBody
 	public String test() {
-		Secret secret = new Secret();
-		User user = userService.get("duxiaodong");
-		secret.setId(3);
-		secret.setContent("you are an apple in my eye!");
-		secret.setPubdate(new Date());
-		secret.setTitle("love");
-		secret.setUser(user);
-		secretService.insert(secret);
+		User user = new User();
+		user.setId("6065");
+		user.setUsername("shildon");
+		user.setPassword("123");
+		redisTemplate.opsForValue().set("name", user);
 		return "ok";
 	}
 

@@ -10,16 +10,13 @@
 	<!-- 扫描项目 -->
 	<context:component-scan base-package="com.shildon.treehole" />
 	
-	<!-- 加载配置属性文件 -->
-	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath:db.properties" />
 	<!-- 配置数据源 -->
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		destroy-method="close">
-		<property name="url" value="${url}" />
-		<property name="username" value="${username}" />
-		<property name="password" value="${password}" />
-		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${mysql.url}" />
+		<property name="username" value="${mysql.username}" />
+		<property name="password" value="${mysql.password}" />
+		<property name="driverClassName" value="${mysql.driver}" />
 	</bean>
 	
 	<!-- 使用annotation注解方式配置事务 -->
