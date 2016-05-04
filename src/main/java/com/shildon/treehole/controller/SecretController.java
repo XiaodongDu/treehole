@@ -1,5 +1,6 @@
 package com.shildon.treehole.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -33,6 +34,8 @@ public class SecretController extends BaseController {
 		return execute(new Callback<Secret>() {
 			@Override
 			public boolean callback(ResultMap<Secret> resultMap) {
+				secret.setId(12);
+				secret.setPubdate(new Date());
 				return secretService.insert(secret);
 			}
 		});

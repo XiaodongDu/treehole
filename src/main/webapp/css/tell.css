@@ -1,0 +1,44 @@
+.editor-container {
+	width: 1000px;
+	margin: 0 auto;
+	
+	display: none;
+	
+	font-size: 20px;
+}
+
+.editor-container > input {
+	width: 100%;
+	height: 25px;
+	
+	font-size: 20px;
+}
+
+.editor-container > textarea {
+	width: 100%;
+	
+	font-size: 15px;
+}
+
+.editor-button {
+	width: 100%;
+	height: 50px;
+	position: relative;
+	top: 30px;
+}
+
+.editor-submit {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	float: right;
+
+	color: #d00000;
+	border: 1px solid #d00000;
+	border-radius: 3px;
+}
+
+.editor-submit:hover {
+	cursor: pointer;
+}

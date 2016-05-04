@@ -6,7 +6,55 @@ $(document).ready(function() {
 	isLogin();
 	login();
 	loadMoreItem();
+
+	$('.nav-brand').click(function() {
+		location.href = 'index.html';
+	});
+
+	$('.nav-intro').click(function() {
+		ifLoginDo(showEditor);
+	});
 });
+
+function ifLoginDo(callback) {
+	$.ajax({
+		url: 'login/isLogin.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(json) {
+			if (json.success) {
+				callback();
+			} else {
+				alert('Please sign in!');
+			}
+		}
+	});
+}
+
+function showEditor() {
+	var isShow = $('.editor-container').css('display');
+	if (isShow == 'none') {
+		$('.editor-container').css({
+			'display': 'block'
+		});
+		$('.outest-container').css({
+			'display': 'none'
+		});
+		$('.footer-container').css({
+			'display': 'none'
+		});
+	} else {
+		$('.editor-container').css({
+			'display': 'none'
+		});
+		$('.outest-container').css({
+			'display': 'block'
+		});
+		$('.footer-container').css({
+			'display': 'block'
+		});
+	}
+}
 
 function loadMoreItem() {
 	$('.footer-load-button').click(function() {
@@ -49,6 +97,7 @@ function isLogin() {
 		success: function(json) {
 			if (json.success) {
 				$('.nav-username').html(json.result[0].username);
+				$('.nav-id').html(json.result[0].id);
 			}
 		}
 	});

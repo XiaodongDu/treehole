@@ -14,7 +14,7 @@ public class Secret {
 	private Integer id;
 	private String title;
 	private String content;
-	@DateTimeFormat( pattern = "yyyy-MM-dd")
+	@DateTimeFormat( pattern = "yyyy-MM-dd" )
 	private Date pubdate;
 	private User user;
 	private Treehole treehole;

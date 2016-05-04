@@ -53,6 +53,7 @@ input {
 	position: relative;
 	top: 10%;
 	
+	color: #333;
 	font-size: 20px;
 }
 
@@ -108,14 +109,14 @@ input {
 
 .signup-reset, .signup-signup, .signin-signin {
 	height: 30px;
-	width: 70px;
+	width: 100px;
 	line-height: 30px;
 	display: inline-block;
-	border-bottom: 2px solid gray;
+	color: #d00000;
+	border: 1px solid #d00000;
+	border-radius: 3px;
 }
 
 .signup-reset:hover, .signup-signup:hover, .signin-signin:hover {
 	cursor: pointer;
-	border-bottom-color: #d00000;
-	color: #d00000;
 }

@@ -1,4 +1,4 @@
-* {
+body, div, a, img {
 	margin: 0;
   	border: 0;
   	font-family: Arial,Verdana,Sans-serif;
@@ -129,7 +129,7 @@ a {
 	border-radius: 3px;
 }
 
-.nav-brand img:hover, .item-avatar img:hover {
+.nav-brand img:hover, .nav-intro, .item-avatar img:hover {
 	cursor: pointer;
 }
 
