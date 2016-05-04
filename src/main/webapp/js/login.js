@@ -16,6 +16,10 @@ $(document).ready(function() {
 	$('.signup-signup').click(function() {
 		signup();
 	});
+	
+	$('.nav-brand').click(function() {
+		location.href = 'index.html';
+	});
 });
 
 function login() {
