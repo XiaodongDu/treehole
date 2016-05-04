@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shildon.treehole.model.Secret;
 import com.shildon.treehole.service.SecretService;
 import com.shildon.treehole.support.Callback;
+import com.shildon.treehole.support.IdGenerator;
 import com.shildon.treehole.support.PageHashMap;
 import com.shildon.treehole.support.ResultMap;
 
@@ -27,6 +28,8 @@ public class SecretController extends BaseController {
 	
 	@Resource
 	private SecretService secretService;
+	@Resource
+	private IdGenerator idGenerator;
 	
 	@RequestMapping("/insert.do")
 	@ResponseBody
@@ -34,7 +37,7 @@ public class SecretController extends BaseController {
 		return execute(new Callback<Secret>() {
 			@Override
 			public boolean callback(ResultMap<Secret> resultMap) {
-				secret.setId(12);
+				secret.setId(idGenerator.getId(Secret.class));
 				secret.setPubdate(new Date());
 				return secretService.insert(secret);
 			}

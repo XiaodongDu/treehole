@@ -23,7 +23,7 @@
 			values(#{id},#{about},#{user.id})
 	</insert>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="long">
 		delete from treehole where id=#{id}
 	</delete>
 
@@ -34,7 +34,7 @@
 		where id=#{id}
 	</update>
 	
-	<select id="get" parameterType="int" resultMap="TreeholeResult">
+	<select id="get" parameterType="long" resultMap="TreeholeResult">
 		select * from treehole where id=#{id}
 	</select>
 </mapper>
