@@ -76,6 +76,10 @@ a {
 	border-radius: 3px;
 }
 
+.nav-id {
+	display: none;
+}
+
 .outest-container {
 	width: 1000px;
 	margin: 0 auto;
@@ -90,10 +94,14 @@ a {
 
 .other-container {
 	width: 27%;
-	float: left;
+	float: right;
 	margin-left: 3%;
 
 	text-align: center;
+}
+
+.saysomething-title {
+	color: #d00000;
 }
 
 .item {

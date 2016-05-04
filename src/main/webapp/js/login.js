@@ -1,41 +1,59 @@
 $(document).ready(function() {
 	$('.signin-signin').click(function() {
-		$.ajax({
-			url: 'login/signin.do',
-			type: 'post',
-			data: {
-				id: $('.signin-username-input').val(),
-				password: $('.signin-password-input').val(),
-			},
-			dataType: 'json',
-			success: function(json) {
-				if (json.success) {
-					location.href = 'index.html';
-				} else {
-					alert('username or password error!');
-				}
-			}
-		});
+		login();
+	});
+	
+	$('.signin-password-input').keyup(function(event) {
+		if (event.keyCode == 13) {
+			login();
+		}
 	});
 	
 	$('.signup-reset').click(function() {
-		$('input[class^=signup]').val('');
+		reset();
 	});
 	
 	$('.signup-signup').click(function() {
-		$.ajax({
-			url: 'user/insert.do',
-			type: 'post',
-			data: {
-				username: $('.signup-username-input').val(),
-				password: $('.signup-password-input').val(),
-			},
-			dataType: 'json',
-			success: function(json) {
-				if (json.success) {
-					alert('sign up success!');
-				}
-			}
-		});
+		signup();
 	});
 });
+
+function login() {
+	$.ajax({
+		url: 'login/signin.do',
+		type: 'post',
+		data: {
+			id: $('.signin-username-input').val(),
+			password: $('.signin-password-input').val(),
+		},
+		dataType: 'json',
+		success: function(json) {
+			if (json.success) {
+				location.href = 'index.html';
+			} else {
+				alert('username or password error!');
+			}
+		}
+	});
+}
+
+function reset() {
+	$('input[class^=signup]').val('');
+}
+
+function signup() {
+	$.ajax({
+		url: 'user/insert.do',
+		type: 'post',
+		data: {
+			username: $('.signup-username-input').val(),
+			password: $('.signup-password-input').val(),
+		},
+		dataType: 'json',
+		success: function(json) {
+			if (json.success) {
+				alert('sign up success!');
+			}
+		}
+	});
+}

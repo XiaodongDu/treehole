@@ -19,16 +19,37 @@ input {
 	font-size: 20px;
 }
 
-.signin-form, .signup-form {
+.login-form {
+	width: 100%;
+	height: 500px;
+}
+
+.login-button {
+	width: 100%;
+}
+
+.signin-container, .signup-container {
 	display: inline-block;
-	width: 498px;
+	width: 499px;
 	float: left;
 	
 	text-align: center;
 }
 
-.signin-form {
-	border-right: 1px solid gray;
+.login-border {
+	display: inline-block;
+	background-color: #d00000;
+	width: 2px;
+	height: 100%;
+	float: left;
+}
+
+.signin-button, .signup-button {
+	display: inline-block;
+	width: 50%;
+	float: left;
+
+	text-align: center;
 }
 
 div[class$='left'], div[class$='right'] {
@@ -59,4 +80,5 @@ input {
 .signup-reset:hover, .signup-signup:hover, .signin-signin:hover {
 	cursor: pointer;
 	border-bottom-color: #d00000;
+	color: #d00000;
 }
