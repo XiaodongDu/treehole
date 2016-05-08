@@ -16,6 +16,7 @@ import com.shildon.treehole.support.Callback;
 import com.shildon.treehole.support.IdGenerator;
 import com.shildon.treehole.support.PageHashMap;
 import com.shildon.treehole.support.ResultMap;
+import com.shildon.treehole.vo.SecretVo;
 
 /**
  * 
@@ -46,15 +47,15 @@ public class SecretController extends BaseController {
 	
 	@RequestMapping("/queryBy.do")
 	@ResponseBody
-	public ResultMap<Secret> queryBy(final int begin, final int sum) {
-		return execute(new Callback<Secret>() {
+	public ResultMap<SecretVo> queryBy(final int begin, final int sum) {
+		return execute(new Callback<SecretVo>() {
 			@Override
-			public boolean callback(ResultMap<Secret> resultMap) {
+			public boolean callback(ResultMap<SecretVo> resultMap) {
 				Map<String, Object> map = new PageHashMap().
 						setBegin(begin).setSum(sum);
 				List<Secret> secrets = secretService.queryBy(map);
 				if (null != secrets) {
-					resultMap.setResult(secrets);
+					resultMap.setResult(new SecretVo().build(secrets));
 					return true;
 				} else {
 					return false;

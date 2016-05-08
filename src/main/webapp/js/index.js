@@ -5,30 +5,37 @@ $(document).ready(function() {
 	loadItem();
 	isLogin();
 	login();
-	loadMoreItem();
+	
+	$('.footer-load-button').click(function() {
+		ifLoginDo(loadMoreItem, notLogin);
+	});
 
 	$('.nav-brand').click(function() {
 		location.href = 'index.html';
 	});
 
 	$('.nav-intro').click(function() {
-		ifLoginDo(showEditor);
+		ifLoginDo(showEditor, notLogin);
 	});
 });
 
-function ifLoginDo(callback) {
+function ifLoginDo(doSuccess, doFail) {
 	$.ajax({
 		url: 'login/isLogin.do',
 		type: 'get',
 		dataType: 'json',
 		success: function(json) {
 			if (json.success) {
-				callback();
+				doSuccess();
 			} else {
-				alert('Please sign in!');
+				doFail();
 			}
 		}
 	});
+}
+
+function notLogin() {
+	alert("Please sign in!");
 }
 
 function showEditor() {
@@ -36,6 +43,9 @@ function showEditor() {
 	if (isShow == 'none') {
 		$('.editor-container').css({
 			'display': 'block'
+		});
+		$('.profile-container').css({
+			'display': 'none'
 		});
 		$('.outest-container').css({
 			'display': 'none'
@@ -45,6 +55,9 @@ function showEditor() {
 		});
 	} else {
 		$('.editor-container').css({
+			'display': 'none'
+		});
+		$('.profile-container').css({
 			'display': 'none'
 		});
 		$('.outest-container').css({
@@ -57,36 +70,55 @@ function showEditor() {
 }
 
 function loadMoreItem() {
-	$('.footer-load-button').click(function() {
-		$.ajax({
-			url: 'login/isLogin.do',
-			type: 'get',
-			dataType: 'json',
-			success: function(json) {
-				if (json.success) {
-					if (sum < 7) {
-						$('.item-container').append('<div class="item-tip">No more ~</div>');
-			    		$('.footer-container').css({
-			    			'visibility': 'hidden'
-			    		});
-					} else {
-						loadItem();
-					}
-				} else {
-					alert('Please sign in!');
-				}
-			}
+	if (sum < 7) {
+		$('.item-container').append('<div class="item-tip">No more ~</div>');
+		$('.footer-container').css({
+			'visibility': 'hidden'
 		});
-	});
-
+	} else {
+		loadItem();
+	}
 }
 
 function login() {
 	$('.nav-username').click(function() {
 		if ($('.nav-username').text().trim() == 'Sign in') {
 			location.href = 'login.html';
+		} else if (null != $('.nav-id').html() && '' != $('.nav-id').html) {
+			showProfile();
 		}
 	});
+}
+
+function showProfile() {
+	var isShow = $('.profile-container').css('display');
+	if (isShow == 'none') {
+		$('.profile-container').css({
+			'display': 'block'
+		});
+		$('.editor-container').css({
+			'display': 'none'
+		});
+		$('.outest-container').css({
+			'display': 'none'
+		});
+		$('.footer-container').css({
+			'display': 'none'
+		});
+	} else {
+		$('.profile-container').css({
+			'display': 'none'
+		});
+		$('.editor-container').css({
+			'display': 'none'
+		});
+		$('.outest-container').css({
+			'display': 'block'
+		});
+		$('.footer-container').css({
+			'display': 'block'
+		});
+	}
 }
 
 function isLogin() {
@@ -96,8 +128,14 @@ function isLogin() {
 		dataType: 'json',
 		success: function(json) {
 			if (json.success) {
-				$('.nav-username').html(json.result[0].username);
-				$('.nav-id').html(json.result[0].id);
+				$('.nav-username').text(json.result[0].username);
+				$('.nav-id').text(json.result[0].id);
+				$('.avatar-container img').attr('src', json.result[0].avatarPath);
+				$('.username-input').val(json.result[0].username);
+				$('.password-input').val(json.result[0].password);
+				$('.birthdate-input').val(json.result[0].brithdate);
+				$('.location-input').val(json.result[0].location);
+				$('.aboutme-input').val(json.result[0].aboutMe);
 			}
 		}
 	});

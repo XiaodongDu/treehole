@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @date Apr 22, 2016
  */
 public class User {
+	
 	private String id;
 	private String username;
 	private String password;

@@ -38,4 +38,19 @@ public class UserController extends BaseController {
 		});
 	}
 	
+	@RequestMapping("/update.do")
+	@ResponseBody
+	public ResultMap<User> update(final User user) {
+		return execute(new Callback<User>() {
+			@Override
+			public boolean callback(ResultMap<User> resultMap) {
+				if (userService.update(user)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
+	}
+	
 }
