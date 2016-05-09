@@ -43,6 +43,7 @@ function updateUser() {
 		success: function(json) {
 			if (json.success) {
 				alert("update profile success!");
+				location.href = 'index.html';
 			} else {
 				alert("update profile fail!");
 			}
