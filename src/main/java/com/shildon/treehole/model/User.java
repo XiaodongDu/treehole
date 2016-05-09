@@ -14,7 +14,7 @@ public class User {
 	private String id;
 	private String username;
 	private String password;
-	private String avatarPath;
+	private String avatarPath = "static/brand.png";
 	private String aboutMe;
 	private String location;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

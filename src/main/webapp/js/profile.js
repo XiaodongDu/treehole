@@ -2,8 +2,11 @@ $(document).ready(function() {
 	$('.avatar-file').change(function() {
 		var formData = new FormData();
 		var file = this.files[0];
+		var name = $('.nav-id').text() + 'Avatar.jpg';
+		var id = $('.nav-id').text();
 		formData.append('file', file);
-		formData.append('name', '2.jpg');
+		formData.append('name', name);
+		formDate.append('id', id);
 		
 		$.ajax({
 			url: 'upload.do',
@@ -26,6 +29,23 @@ $(document).ready(function() {
 
 function updateUser() {
 	$.ajax({
-		
+		url: '/user/update.do',
+		type: 'post',
+		dataType: 'json',
+		date: {
+			id: $('.nav-id').text(),
+			username: $('.username-input').val(),
+			password: $('.password-input').val(),
+			aboutMe: $('.aboutme-input').val(),
+			location: $('.location-input').val(),
+			birthdate: $('.birthdate-input').val()
+		},
+		success: function(json) {
+			if (json.success) {
+				alert("update profile success!");
+			} else {
+				alert("update profile fail!");
+			}
+		}
 	});
 }
