@@ -35,13 +35,14 @@ function getFileName(file){
 
 function updateUser() {
 	$.ajax({
-		url: '/user/update.do',
+		url: 'user/update.do',
 		type: 'post',
 		dataType: 'json',
-		date: {
+		data: {
 			id: $('.nav-id').text(),
 			username: $('.username-input').val(),
 			password: $('.password-input').val(),
+			avatarPath: $('.avatar-container img').attr('src'),
 			aboutMe: $('.aboutme-input').val(),
 			location: $('.location-input').val(),
 			birthdate: $('.birthdate-input').val()
