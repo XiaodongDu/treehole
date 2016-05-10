@@ -1,6 +1,7 @@
 package com.shildon.treehole.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,11 +41,12 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("/update.do")
 	@ResponseBody
-	public ResultMap<User> update(final User user) {
+	public ResultMap<User> update(final User user, final HttpSession httpSession) {
 		return execute(new Callback<User>() {
 			@Override
 			public boolean callback(ResultMap<User> resultMap) {
 				if (userService.update(user)) {
+					httpSession.setAttribute("user", user);
 					return true;
 				} else {
 					return false;

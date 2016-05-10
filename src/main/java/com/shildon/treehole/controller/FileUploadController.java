@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,24 +34,33 @@ public class FileUploadController extends BaseController {
 	
 	@RequestMapping(value = "/upload.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultMap<Object> handleFormUpload(final String id, final String name, final MultipartFile file) {
-		return execute(new Callback<Object>() {
+	public ResultMap<User> handleFormUpload(final String id, final String name,
+			final MultipartFile file, final HttpSession httpSession) {
+		return execute(new Callback<User>() {
 			@Override
-			public boolean callback(ResultMap<Object> resultMap) {
+			public boolean callback(ResultMap<User> resultMap) {
 				User user = userService.get(id);
 				String rootPath = servletContext.getRealPath("/avatar");
 				String fullPath = rootPath + "/" + name;
+				String relativePath = "avatar/" + name;
 				File localFile = new File(fullPath);
 				try (RandomAccessFile randomAccessFile = new RandomAccessFile(localFile, "rw")) {
 					byte[] fileData = file.getBytes();
 					randomAccessFile.write(fileData);
-					user.setAvatarPath(fullPath);
-					userService.update(user);
+					user.setAvatarPath(relativePath);
+					
+					if (userService.update(user)) {
+						httpSession.setAttribute("user", user);
+						resultMap.addResult(user);
+						return true;
+					} else {
+						return false;
+					}
+					
 				} catch (IOException e) {
 					e.printStackTrace();
 					return false;
 				}
-				return true;
 			}
 		});
 	}

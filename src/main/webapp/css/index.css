@@ -42,16 +42,17 @@ a {
 
 .nav-intro {
 	height: 50px;
-	width: 400px;
+	width: 200px;
 	line-height: 50px;
 	margin-left: 30px;
 
 	font-size: 20px;
 	font-weight: bold;
 	color: #D00000;
+	text-align: center;
 }
 
-.nav-username:hover {
+.nav-username:hover, .nav-intro:hover {
 	cursor: pointer;
 	background-color: #333;
 }
@@ -129,7 +130,7 @@ a {
 	border-radius: 3px;
 }
 
-.nav-brand img:hover, .nav-intro, .item-avatar img:hover {
+.nav-brand img:hover, .item-avatar img:hover {
 	cursor: pointer;
 }
 

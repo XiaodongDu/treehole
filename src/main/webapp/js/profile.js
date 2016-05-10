@@ -2,11 +2,12 @@ $(document).ready(function() {
 	$('.avatar-file').change(function() {
 		var formData = new FormData();
 		var file = this.files[0];
-		var name = $('.nav-id').text() + 'Avatar.jpg';
+		var fileName = $ ('.nav-id').text() 
+				+ getFileName($('.avatar-file').val());
 		var id = $('.nav-id').text();
 		formData.append('file', file);
-		formData.append('name', name);
-		formDate.append('id', id);
+		formData.append('name', fileName);
+		formData.append('id', id);
 		
 		$.ajax({
 			url: 'upload.do',
@@ -18,7 +19,7 @@ $(document).ready(function() {
 			processData: false,
 			success: function(json) {
 				if (json.success) {
-					alert("upload success!");
+					$('.avatar-container img').attr('src', json.result[0].avatarPath);
 				}
 			}
 		});
@@ -26,6 +27,11 @@ $(document).ready(function() {
 	
 	$('.profile-submit').click(updateUser);
 });
+
+function getFileName(file){
+    var pos = file.lastIndexOf("\\");
+    return file.substring(pos + 1);  
+}
 
 function updateUser() {
 	$.ajax({
