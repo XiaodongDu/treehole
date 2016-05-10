@@ -3,3 +3,4 @@
 target
 .settings
 src/test
+src/main/webapp/avatar
