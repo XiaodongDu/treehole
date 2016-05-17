@@ -3,8 +3,8 @@ package com.shildon.treehole.vo;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.shildon.treehole.DateUtil;
 import com.shildon.treehole.model.User;
+import com.shildon.treehole.support.DateUtil;
 
 /**
  * 
