@@ -20,6 +20,8 @@ $(document).ready(function() {
 			success: function(json) {
 				if (json.success) {
 					$('.avatar-container img').attr('src', json.result[0].avatarPath);
+				} else {
+					alert(json.result);
 				}
 			}
 		});

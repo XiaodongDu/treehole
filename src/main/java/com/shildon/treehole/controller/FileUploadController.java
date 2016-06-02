@@ -9,9 +9,12 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.shildon.treehole.model.User;
@@ -25,6 +28,7 @@ import com.shildon.treehole.support.ResultMap;
  * @date May 4, 2016
  */
 @Controller
+@ControllerAdvice
 public class FileUploadController extends BaseController {
 	
 	@Resource
@@ -61,6 +65,19 @@ public class FileUploadController extends BaseController {
 					e.printStackTrace();
 					return false;
 				}
+			}
+		});
+	}
+	
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
+	@ResponseBody
+	public ResultMap<String> handleUploadException(final MaxUploadSizeExceededException e) {
+		return execute(new Callback<String>() {
+
+			@Override
+			public boolean callback(ResultMap<String> resultMap) {
+				resultMap.addResult("文件大小超出!");
+				return false;
 			}
 		});
 	}
