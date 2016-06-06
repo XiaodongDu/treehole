@@ -68,4 +68,16 @@ public class LoginController extends BaseController {
 		});
 	}
 	
+	@RequestMapping("/logout.do")
+	@ResponseBody
+	public ResultMap<User> logout(final HttpSession httpSession) {
+		return execute(new Callback<User>() {
+			@Override
+			public boolean callback(ResultMap<User> resultMap) {
+				httpSession.removeAttribute("user");
+				return true;
+			}
+		});
+	}
+	
 }
