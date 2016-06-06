@@ -50,6 +50,7 @@ function signup() {
 		url: 'user/insert.do',
 		type: 'post',
 		data: {
+			id: $('.signup-username-input').val(),
 			username: $('.signup-username-input').val(),
 			password: $('.signup-password-input').val(),
 		},
@@ -57,6 +58,7 @@ function signup() {
 		success: function(json) {
 			if (json.success) {
 				alert('sign up success!');
+				location.href = 'index.html';
 			}
 		}
 	});

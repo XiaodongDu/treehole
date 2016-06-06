@@ -26,11 +26,12 @@ public class UserController extends BaseController {
 	
 	@RequestMapping("/insert.do")
 	@ResponseBody
-	public ResultMap<User> insert(final User user) {
+	public ResultMap<User> insert(final HttpSession httpSession, final User user) {
 		return execute(new Callback<User>() {
 			@Override
 			public boolean callback(ResultMap<User> resultMap) {
 				if (userService.insert(user)) {
+					httpSession.setAttribute("user", user);
 					return true;
 				} else {
 					return false;
