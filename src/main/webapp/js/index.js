@@ -17,7 +17,40 @@ $(document).ready(function() {
 	$('.nav-intro').click(function() {
 		ifLoginDo(showEditor, notLogin);
 	});
+	
+	$('.nav-dropdown-container').mouseover(function () {
+		if (null != $('.nav-id').html() && '' != $('.nav-id').html().trim()) {
+			$('.nav-dropdown').css({
+				'display': 'block'
+			});
+		}
+	});
+	
+	$('.nav-dropdown-container').mouseout(function() {
+		if (null != $('.nav-id').html() && '' != $('.nav-id').html().trim()) {
+			$('.nav-dropdown').css({
+				'display': 'none'
+			});
+		}
+	});
+	
+	$('.nav-dropdown-logout').click(logout);
 });
+
+function logout() {
+	$.ajax({
+		url: 'login/logout.do',
+		type: 'get',
+		dateType: 'json',
+		success: function(json) {
+			if (json.success) {
+				location.href = 'index.html';
+			} else {
+				alert('Log out failed!');
+			}
+		}
+	});
+}
 
 function ifLoginDo(doSuccess, doFail) {
 	$.ajax({
@@ -84,7 +117,7 @@ function login() {
 	$('.nav-username').click(function() {
 		if ($('.nav-username').text().trim() == 'Sign in') {
 			location.href = 'login.html';
-		} else if (null != $('.nav-id').html() && '' != $('.nav-id').html) {
+		} else if (null != $('.nav-id').html() && '' != $('.nav-id').html().trim()) {
 			showProfile();
 		}
 	});

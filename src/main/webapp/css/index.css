@@ -52,7 +52,7 @@ a {
 	text-align: center;
 }
 
-.nav-username:hover, .nav-intro:hover {
+.nav-username:hover, .nav-intro:hover, .nav-dropdown-logout:hover {
 	cursor: pointer;
 	background-color: #333;
 }
@@ -62,9 +62,9 @@ a {
   	height: 80px;
 }
 
-.nav-username {
+.nav-dropdown-container {
 	height: 50px;
-	width: 100px;
+	width: 150px;
 	line-height: 50px;
 	text-align: center;
 
@@ -72,7 +72,31 @@ a {
 
 	font-size: 20px;
 	font-weight: bold;
-	color: #D00000;
+	color: #ddd;
+}
+
+.nav-username {
+	height: 50px;
+	width: 150px;
+
+	border-radius: 3px;
+}
+
+.nav-dropdown {
+	height: 50px;
+	width: 150px;
+	background-color: black;
+  	opacity: 0.9;
+	position: absolute;
+
+	display: none;
+
+	border-radius: 3px;
+}
+
+.nav-dropdown-logout {
+	height: 50px;
+	width: 150px;
 
 	border-radius: 3px;
 }
