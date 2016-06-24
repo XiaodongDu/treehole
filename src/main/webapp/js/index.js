@@ -3,6 +3,7 @@ var sum = 7;
 
 $(document).ready(function() {
 	loadItem();
+	loadPageViews();
 	isLogin();
 	login();
 	
@@ -36,6 +37,21 @@ $(document).ready(function() {
 	
 	$('.nav-dropdown-logout').click(logout);
 });
+
+function loadPageViews() {
+	$.ajax({
+		url: 'login/pageviews.do',
+		type: 'get',
+		dataType: 'json',
+		success: function(json) {
+			if (json.success) {
+				$('.saysomething-content').html(json.result);
+			} else {
+				$('.saysomething-content').html('0');
+			}
+		}
+	});
+}
 
 function logout() {
 	$.ajax({

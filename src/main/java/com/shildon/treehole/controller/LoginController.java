@@ -12,6 +12,7 @@ import com.shildon.treehole.model.User;
 import com.shildon.treehole.service.SecretService;
 import com.shildon.treehole.service.UserService;
 import com.shildon.treehole.support.Callback;
+import com.shildon.treehole.support.PageView;
 import com.shildon.treehole.support.ResultMap;
 
 /**
@@ -27,6 +28,8 @@ public class LoginController extends BaseController {
 	private UserService userService;
 	@Resource
 	private SecretService secretService;
+	@Resource
+	private PageView pageView;
 	
 	@RequestMapping(value = "/signin.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -76,6 +79,24 @@ public class LoginController extends BaseController {
 			public boolean callback(ResultMap<User> resultMap) {
 				httpSession.removeAttribute("user");
 				return true;
+			}
+		});
+	}
+	
+	@RequestMapping("/pageviews.do")
+	@ResponseBody
+	public ResultMap<Long> getPageViews() {
+		return execute(new Callback<Long>() {
+			@Override
+			public boolean callback(ResultMap<Long> resultMap) {
+				Long pageViews = pageView.getPageViews();
+				
+				if (pageViews >= 0) {
+					resultMap.addResult(pageViews);
+					return true;
+				} else {
+					return false;
+				}
 			}
 		});
 	}
