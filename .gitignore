@@ -2,5 +2,7 @@
 .project
 target
 .settings
+.idea
+treehole.iml
 src/test
 src/main/webapp/avatar
